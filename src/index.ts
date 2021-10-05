@@ -8,6 +8,7 @@ import {enter_text} from "./methods/enter_text";
 import {click_button} from "./methods/click_button";
 import {authenticate} from "./methods/login/login";
 import {search} from "./methods/search/search";
+import {get_search_element} from "./methods/get_search_element";
 
 const main_actual = async () => {
     try {
@@ -23,8 +24,16 @@ const main_actual = async () => {
         await sleep_for(page, 1000, 2000)
 
         await authenticate(page)
+        await sleep_for(page, 40000, 40000)
         await search(page)
         await click_button(page, 'li.search-reusables__primary-filter')
+
+        await sleep_for(page, 500, 1000)
+
+        const User = await get_search_element(page)
+        console.log(User)
+        await sleep_for(page, 500, 1000)
+
 
     } catch (e) {
         console.log(e)
